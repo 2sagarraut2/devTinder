@@ -22,7 +22,10 @@ const userAuth = async (req, res, next) => {
     req.user = user;
     next();
   } catch (err) {
-    res.status(400).send("EROR: " + err.message);
+    res.status(400).send({
+      error:
+        "An unexpected error occurred. Please try again later. " + err.message,
+    });
   }
 };
 

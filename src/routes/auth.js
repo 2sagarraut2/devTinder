@@ -26,7 +26,9 @@ authRouter.post("/signup", async (req, res) => {
     await user.save();
     res.json({ message: "User has been created successfully." });
   } catch (err) {
-    res.status(400).send("Error occured while saving user " + err.message);
+    res
+      .status(400)
+      .send({ error: "Error occured while saving user " + err.message });
   }
 });
 
@@ -52,14 +54,14 @@ authRouter.post("/login", async (req, res) => {
       res.cookie("token", token, {
         expires: new Date(Date.now() + 12 * 36000000),
       });
-      res.send("Login successful");
+      res.json({ message: "Login successful" });
     } else {
       throw new Error("The email or password you entered is incorrect.");
     }
   } catch (err) {
-    res
-      .status(400)
-      .send("An unexpected error occurred. Please try again later. " + err);
+    res.status(400).send({
+      error: "An unexpected error occurred. Please try again later. " + err,
+    });
     console.log(err);
   }
 });
@@ -69,7 +71,7 @@ authRouter.post("/logout", async (req, res) => {
     expires: new Date(Date.now()),
   });
 
-  res.send({ message: "Logout successful" });
+  res.json({ message: "Logout successful" });
 });
 
 module.exports = authRouter;

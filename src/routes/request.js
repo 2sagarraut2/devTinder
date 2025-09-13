@@ -7,11 +7,11 @@ requestRouter.post("/sendConnectionRequest", userAuth, async (req, res) => {
   try {
     const user = req.user;
 
-    res.send({ message: user.firstName + " sent the connection request" });
+    res.json({ message: user.firstName + " sent the connection request" });
   } catch (err) {
-    res
-      .status(400)
-      .send("An unexpected error occurred. Please try again later. " + err);
+    res.status(400).send({
+      error: "An unexpected error occurred. Please try again later. " + err,
+    });
     console.log(err);
   }
 });
