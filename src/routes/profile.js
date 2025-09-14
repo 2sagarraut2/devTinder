@@ -76,7 +76,7 @@ profileRouter.patch("/profile/forgotPassword", userAuth, async (req, res) => {
       });
     } else {
       // Encrypt the data
-      const newHashedPassword = await bcrypt.hash(password, 10);
+      const newHashedPassword = await bcrypt.hash(newPassword, 10);
       user.password = newHashedPassword;
 
       await user.save();
