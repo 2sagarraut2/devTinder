@@ -18,5 +18,5 @@
 - POST /request/review/:status/:requestId
 
 - GET /user/connection
-- GET /user/requests
+- GET /user/requests/received
 - GET /user/feed - gets you profile of other users on platform
