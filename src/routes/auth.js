@@ -54,7 +54,18 @@ authRouter.post("/login", async (req, res) => {
       res.cookie("token", token, {
         expires: new Date(Date.now() + 12 * 36000000),
       });
-      res.json({ message: "Login successful" });
+
+      const userDataToSend = {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        photoUrl: user.photoUrl,
+        age: user.age,
+        gender: user.gender,
+        about: user.about,
+        skills: user.skills,
+      };
+
+      return res.json({ message: "Login successful", data: userDataToSend });
     } else {
       throw new Error("The email or password you entered is incorrect.");
     }
